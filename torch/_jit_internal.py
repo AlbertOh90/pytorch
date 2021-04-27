@@ -903,6 +903,8 @@ def _qualified_name(obj) -> str:
     # qualified name, which is picked up here
     if hasattr(obj, '_jit_override_qualname'):
         return obj._jit_override_qualname
+    elif hasattr(obj, '__str__'):
+        return obj.__str__()
     # short-circuit in cases where the object already has a known qualified name
     if isinstance(obj, torch._C.ScriptFunction):
         return obj.qualified_name
